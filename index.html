@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NEON MIS — Business Command Center</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <header class="topbar">
+    <div class="brand"><span class="orb"></span><div><b>NEON MIS</b><small>BUSINESS COMMAND CENTER</small></div></div>
+    <div class="top-actions">
+      <span id="syncStatus" class="sync">LOCAL DEMO</span>
+      <button class="ghost" id="refreshBtn">↻ Refresh</button>
+      <button class="primary" id="addBtn">＋ Add Business</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">SEPTEMBER 2026 / LIVE OPERATIONS</div>
+        <h1>Business, <span>at a glance.</span></h1>
+        <p>One shared workspace for every employee — add business, track credits and see the team's live performance.</p>
+      </div>
+      <div class="employee-chip"><span class="dot"></span><select id="employeeFilter"><option value="ALL">All Employees</option></select></div>
+    </section>
+
+    <section class="stats">
+      <article class="stat"><small>GROSS BUSINESS</small><strong id="gross">₹0</strong><em id="dealCount">0 deals</em></article>
+      <article class="stat"><small>NET BUSINESS</small><strong id="net">₹0</strong><em>ex-GST credit</em></article>
+      <article class="stat"><small>AVERAGE TICKET</small><strong id="avg">₹0</strong><em>per business</em></article>
+      <article class="stat"><small>TOP PERFORMER</small><strong id="top">—</strong><em id="topValue">₹0 gross</em></article>
+    </section>
+
+    <section class="grid2">
+      <article class="panel chart-panel">
+        <div class="panel-head"><div><small>PERFORMANCE</small><h2>Employee leaderboard</h2></div><span class="live-pill">● LIVE</span></div>
+        <div id="leaderboard"></div>
+      </article>
+      <article class="panel chart-panel">
+        <div class="panel-head"><div><small>TREND</small><h2>Daily business pulse</h2></div><span id="rangeLabel">September</span></div>
+        <div class="bars" id="dailyBars"></div>
+      </article>
+    </section>
+
+    <section class="panel table-panel">
+      <div class="panel-head">
+        <div><small>TRANSACTIONS</small><h2>Business ledger</h2></div>
+        <div class="filters">
+          <input id="search" placeholder="Search customer / employee / app no.">
+          <select id="statusFilter"><option value="ALL">All Status</option><option>ISSUED</option><option>LOGIN</option><option>PENDING</option><option>REJECTED</option></select>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table><thead><tr><th>EMPLOYEE</th><th>DATE</th><th>CUSTOMER</th><th>PLAN</th><th>LOCATION</th><th>STATUS</th><th>GROSS</th><th>NET</th></tr></thead>
+        <tbody id="ledger"></tbody></table>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="businessModal">
+    <form method="dialog" id="businessForm">
+      <div class="modal-head"><div><small>NEW TRANSACTION</small><h2>Add Business</h2></div><button class="x" value="cancel">×</button></div>
+      <div class="form-grid">
+        <label>Employee<select id="fEmployee" required></select></label>
+        <label>Date<input id="fDate" type="date" required></label>
+        <label>Customer Name<input id="fCustomer" required placeholder="Customer name"></label>
+        <label>Mobile No.<input id="fMobile" inputmode="numeric" placeholder="10 digit number"></label>
+        <label>Application No.<input id="fApp" placeholder="Application number"></label>
+        <label>Premium (₹)<input id="fPremium" type="number" min="0" step="0.01" required></label>
+        <label>Sum Insured<input id="fSI" placeholder="e.g. 10 LAC"></label>
+        <label>Plan Name<input id="fPlan" placeholder="e.g. ASPIRE GOLD +"></label>
+        <label>Extra Add-On<input id="fAddon" placeholder="Optional"></label>
+        <label>Status<select id="fStatus"><option>ISSUED</option><option>LOGIN</option><option>PENDING</option><option>REJECTED</option></select></label>
+        <label>Location / Category<select id="fLocation"><option value="ALL">ALL — 100%</option><option value="CAT B 90%">CAT B — 90%</option><option value="CAT B 75%">CAT B — 75%</option><option value="CAT A 40%">CAT A — 40%</option></select></label>
+      </div>
+      <div class="calc"><span>Credit factor <b id="factorPreview">100%</b></span><span>Calculated credit <b id="creditPreview">₹0</b></span><span>Net ex-GST <b id="netPreview">₹0</b></span></div>
+      <button class="primary wide" value="default">Save Business</button>
+      <p class="note">For shared mode, connect Supabase using <code>config.js</code>. GitHub Pages alone cannot securely store shared edits.</p>
+    </form>
+  </dialog>
+
+  <footer>NEON MIS v1.0 · Built for shared team operations · GitHub Pages + Supabase ready</footer>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
