@@ -309,3 +309,22 @@ function setupEvents(){
 function updateCalc(){const f=factorFor($("fLocation").value);const p=Number($("fPremium").value||0);$("factorPreview").textContent=Math.round(f*100)+"%";$("creditPreview").textContent=money(p*f);$("netPreview").textContent=money(p*f/1.18)}
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 init();
+
+const businessModal = document.getElementById("businessModal");
+const closeModalBtn = document.getElementById("closeModalBtn");
+const addBtn = document.getElementById("addBtn");
+
+addBtn.addEventListener("click", () => {
+  businessModal.showModal();
+});
+
+closeModalBtn.addEventListener("click", () => {
+  businessModal.close();
+});
+
+// Dialog ke bahar click karne par close
+businessModal.addEventListener("click", (e) => {
+  if (e.target === businessModal) {
+    businessModal.close();
+  }
+});
