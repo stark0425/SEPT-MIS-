@@ -260,7 +260,7 @@ async function saveRow(r){
   }
   rows.unshift(r); localStorage.setItem("neon_mis_rows",JSON.stringify(rows)); return true;
 }
-const EMPLOYEE_MASTER = ["HIMANSHU","RAJAN","ROHIT","AKASH","KAIF","NIKHIL","KAVYANSH","PRINCE"];
+const EMPLOYEE_MASTER = ["HIMANSHU","RAJAN","ROHIT","AKASH","KAIF","NIKHIL","KAVYANSH","PRINCE","SUMAN"];
 function employees(){ return EMPLOYEE_MASTER.slice(); }
 function setupEmployees(){
   const emps=employees();
